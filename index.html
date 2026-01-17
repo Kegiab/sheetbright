@@ -214,6 +214,19 @@
   animation: fall 0.5s ease-out forwards;
 }
 
+#falling-text {
+  display: inline-block;
+}
+
+.word {
+  white-space: nowrap; /* A szó NEM törhet meg */
+}
+
+.word span {
+  display: inline-block;
+  animation: fall 1s ease forwards;
+}
+
 @keyframes fall {
   0%   { transform: translateY(-80px); opacity: 0; }
   80%  { transform: translateY(10px); }
@@ -221,9 +234,10 @@
 }
 
 
+
 .nav {
   display: flex;
-  gap: 24px;
+  gap: 1px;
 }
 
 .nav a {
@@ -238,8 +252,8 @@
 }
 
 .nav a svg {
-  width: 22px;
-  height: 22px;
+  width: 17px;
+  height: 17px;
   stroke: currentColor;
 }
 
@@ -698,15 +712,31 @@ notes2.forEach((d, i) => {
 });
 
 
-const text = "Sheet Bright";
+const text = ["Sheet", "Bright"];
 const container = document.getElementById("falling-text");
 
-[...text].forEach((char, i) => {
-  const span = document.createElement("span");
-  span.textContent = char === " " ? "\u00A0" : char;
-  span.style.animationDelay = `${i * 0.26}s`;
-  container.appendChild(span);
+let delay = 0;
+
+text.forEach((word, wordIndex) => {
+  const wordSpan = document.createElement("span");
+  wordSpan.className = "word";
+
+  [...word].forEach(char => {
+    const span = document.createElement("span");
+    span.textContent = char;
+    span.style.animationDelay = `${delay * 0.26}s`;
+    delay++;
+    wordSpan.appendChild(span);
+  });
+
+  container.appendChild(wordSpan);
+
+  // szóköz a szavak közé
+  if (wordIndex < text.length - 1) {
+    container.appendChild(document.createTextNode(" "));
+  }
 });
+
 </script>
 <script>
 const t2 = gsap.timeline({ delay: 1.0 });
