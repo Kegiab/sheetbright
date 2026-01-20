@@ -36,7 +36,7 @@
         main {
             max-width: 1000px;
             margin: auto;
-            padding: 40px 20px;
+            padding: 20px 10px;
         }
 
         section {
@@ -94,7 +94,7 @@
   }
 
   .image-grid img {
-    width: clamp(150px, 20vw, 400px); /* minimum 200px, maximum 400px, dinamikusan változik */
+    width: clamp(150px, 15vw, 400px); /* minimum 200px, maximum 400px, dinamikusan változik */
     height: auto; /* magasság arányosan a szélességgel */
     aspect-ratio: 1/2; /* szélesség : magasság = 1:2 */
     object-fit: contain; /* a kép nem vágódik, teljesen látszik */
@@ -169,6 +169,11 @@
 .item {
   opacity: 0;
   animation: appear 0.8s ease forwards;
+  animation-play-state: paused;
+}
+
+.item.animate {
+  animation-play-state: running;
 }
 
 .item:nth-child(1) { animation-delay: 0.5s; }
@@ -553,7 +558,7 @@
 
 <!-- FŐ TARTALOM rgb(16,30,32)-->
 <main>
-	<div class="row">Sheet Bright Visual külső eszköz: </div>
+	<div class="row"><b><strong>Sheet Bright Visual külső eszköz</strong></b></div>
 	<br>
 	<!--div class="rowLeft">
     <img src="app_icon2.png" alt="" class="title-icon">
@@ -572,25 +577,41 @@
     </section>
 	</div>
 	<div>
-	<div class="item">→ Könnyedém megtanulhatja és lejátszhatja kedvenc zongora darabjait</div>
-	<div class="item">→ Fokozatosan erősödő fények megmutatják, a következő leütendő billentyűket</div>
-	<div class="item">→ Applikáció rengeteg ismert zongora darabot tartalmaz</div>
-	<div class="item">→ Zeneszerkesztő program segítségével beviheti a tanulandó darabot</div>
+	<!--ol>
+	<li>Könnyedém megtanulhatja és lejátszhatja kedvenc zongora darabjait</li>
+	<li>Fokozatosan erősödő fények megmutatják, a következő leütendő billentyűket</li>
+	<li>Applikáció rengeteg ismert zongora darabot tartalmaz</li>
+	<li>Zeneszerkesztő program segítségével beviheti a tanulandó darabot</li>
+	</ol-->
+	<ul>
+	<li class="item">Könnyedém megtanulhatja és lejátszhatja kedvenc zongora darabjait</li>
+	<li class="item">Fokozatosan erősödő fények előre mutatják, az elkövetkezendő billentyűket</li>
+	<li class="item">Applikáció rengeteg ismert zongora darabot tartalmaz</li>
+	<li class="item">Zeneszerkesztő program segítségével beviheti a tanulandó darabot</li>
+	</ul>
 	<!--div class="item">Külső vezértlő eszköz, csatlakoztassa áramforráshoz USB keresztül (Power bank, vagy telefon töltő)</div>
 	<div class="item">Csatlakozzon WIFI-n keresztül az Andoidos telefonon vagy tableten keresztül</div>
 	<div class="item">Indítsa el az ingyenes SheetBright programot, és nyomja meg a connect gombot</div-->
 	</div>
 	<br><br>
-	
+	<div><b>Egyszerű használat</b></div>
+	<ul>
+	<li class="item">Csatlakoztassa USB áramforráshoz</li>
+	<li class="item">Kapcsolódjon WIFI-n keresztül</li>
+	<li class="item">Application start, connect and play</li>
+	</ul>
+	<br><br>
+	<div><b><strong>SheetBright application</strong></b></div>
+	<p>
+		A SheetBright zenei alkalmazással kottákat tudunk megjeleníteni, szerkeszteni lejátszani. Népszerű dalok vannak a beépített gyűjteménybe, amelyek közül válogathatunk. A szoftverbe belekerült egy zongora klaviatúra, és egy játék, amelynél a lejátszott zene hangjai kis vonalként csorognak le jelezve a következő leütendő billentyűt. A helyes lejátszásért jutalom pontok kaphatóak,és elegendő pontokkal bronz, ezüst, arany stb. zongora díjjak, pajzsok szerezhetőek. 
+	</p>
+	<br><br>
 	<div class="image-grid">
 		<img src="edit_screen.jpg" alt="Kép 1">
 		<img src="music_screen.jpg" alt="Kép 2">
 		<img src="list_screen.jpg" alt="Kép 3">
 		<img src="game_screen.jpg" alt="Kép 4">
 	</div>
-	<p>
-		A SheetBright zenei alkalmazással kottákat tudunk megjeleníteni, szerkeszteni lejátszani. Népszerű dalok vannak a beépített gyűjteménybe, amelyek közül válogathatunk. A szoftverbe belekerült egy zongora klaviatúra, és egy játék, amelynél a lejátszott zene hangjai kis vonalként csorognak le jelezve a következő leütendő billentyűt. A helyes lejátszásért jutalom pontok kaphatóak,és elegendő pontokkal bronz, ezüst, arany stb. zongora díjjak, pajzsok szerezhetőek. 
-	</p>
 
     <!-- SAJÁT VIDEÓ -->
     <section>
@@ -796,6 +817,21 @@ t2.from("#kep", {
   scale: 1,
   opacity: 1,
   duration: 0.8
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate');
+      observer.unobserve(entry.target); // csak egyszer fusson le
+    }
+  });
+}, {
+  threshold: 0.3
+});
+
+document.querySelectorAll('.item').forEach(el => {
+  observer.observe(el);
 });
 </script>
 	
