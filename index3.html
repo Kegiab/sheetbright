@@ -86,24 +86,21 @@
         }
 		
 		/* ===== MAGAS KÉPSÁV ===== */
-		.image-strip {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-			gap: 15px;
-			margin: 60px 0;
-		}
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap; /* új sorba kerül, ha nincs elég hely */
+    gap: 10px; /* kis rés a képek között */
+    justify-content: center;
+  }
 
-		.image-strip img {
-			width: 100%;
-			height: 500px;              /* magasság → magas, keskeny */
-			object-fit: cover;          /* nem torzul */
-			border-radius: 10px;
-			transition: transform 0.3s ease;
-		}
-
-		.image-strip img:hover {
-			transform: scale(1.05);
-		}
+  .image-grid img {
+    width: clamp(150px, 20vw, 400px); /* minimum 200px, maximum 400px, dinamikusan változik */
+    height: auto; /* magasság arányosan a szélességgel */
+    aspect-ratio: 1/2; /* szélesség : magasság = 1:2 */
+    object-fit: contain; /* a kép nem vágódik, teljesen látszik */
+    display: block;
+    border: 1px solid #ccc;
+  }
 		
 		.inline-icon {
 			width: 64;
@@ -174,9 +171,9 @@
   animation: appear 0.8s ease forwards;
 }
 
-.item:nth-child(1) { animation-delay: 0.2s; }
-.item:nth-child(2) { animation-delay: 0.6s; }
-.item:nth-child(3) { animation-delay: 1s; }
+.item:nth-child(1) { animation-delay: 0.5s; }
+.item:nth-child(2) { animation-delay: 1.5s; }
+.item:nth-child(3) { animation-delay: 2.5s; }
 
 @keyframes appear {
   from {
@@ -200,6 +197,71 @@
   display: flex;
   align-items: center;
   justify-content: left;
+}
+
+.text-row {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.text-row span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-40px);
+  animation: fall 0.5s ease-out forwards;
+}
+
+#falling-text {
+  display: inline-block;
+}
+
+.word {
+  white-space: nowrap; /* A szó NEM törhet meg */
+}
+
+.word span {
+  display: inline-block;
+  animation: fall 1s ease forwards;
+}
+
+@keyframes fall {
+  0%   { transform: translateY(-80px); opacity: 0; }
+  80%  { transform: translateY(10px); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+
+
+.nav {
+  display: flex;
+  gap: 1px;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.nav a svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+}
+
+.nav a:hover {
+  background: #f3f4f6;
+  color: #111;
+}
+
+.nav a:hover svg {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
 }
 
     </style>
@@ -231,7 +293,7 @@
         </p>
     </section-->
 	<div class="row">
-	<svg id="stage" width="400" height="160" viewBox="400 0 100 650">
+	<svg id="stage" width="160" height="160" viewBox="450 0 400 650">
 
   <!-- ===== BAL: C–D–E FELETT ===== -->
   <g id="staffLeft" stroke="#555" stroke-width="2">
@@ -335,10 +397,10 @@
 	<div>
     <h1>
 	<!--img src="app_icon.png" alt="" class="title-icon"-->
-	Sheet bright
+	<div class="text-row" id="falling-text"></div>
 	</h1>
 	</div>
-	<svg id="stage2" width="400" height="160" viewBox="300 0 1200 650">
+	<svg id="stage2" width="160" height="160" viewBox="400 0 400 650">
 
   <!-- ===== BAL: C–D–E FELETT ===== -->
   <g id="staffLeft" stroke="#555" stroke-width="2">
@@ -440,11 +502,46 @@
 
 </svg>
 </div>
-	<nav>
-        <a href="index.html">Home</a>
-        <a href="shop.html">Shop</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+
+<div class="row">
+<nav class="nav">
+  <a href="index.html">
+    <!-- Home -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 11.5L12 4l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"
+            fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linejoin="round"/>
+    </svg>
+    <span>Home</span>
+  </a>
+
+  <a href="shop.html">
+    <!-- Shopping cart (szebb 😊) -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="9" cy="21" r="1"/>
+      <circle cx="18" cy="21" r="1"/>
+      <path d="M2 3h2l2.4 12.4a2 2 0 0 0 2 1.6h9.6a2 2 0 0 0 2-1.6L22 7H6"
+            fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Shop</span>
+  </a>
+
+  <a href="contact.html">
+    <!-- Contact -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 6h18v12H3z"
+            fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linejoin="round"/>
+      <path d="M3 6l9 7 9-7"
+            fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linejoin="round"/>
+    </svg>
+    <span>Contact</span>
+  </a>
+</nav>
+</div>
+
 </header>
 
 
@@ -455,12 +552,17 @@
 
 <!-- FŐ TARTALOM rgb(16,30,32)-->
 <main>
+	<div class="row">Sheet Bright Visual külső eszköz: </div>
+	<div></div>
 	<div class="rowLeft">
     <img src="app_icon2.png" alt="" class="title-icon">
 	<div>
-	<div class="item">Első</div>
-	<div class="item">Második</div>
-	<div class="item">Harmadik</div>
+	<div class="item">1. Csatlakoztassa USB áramforráshoz</div>
+	<div class="item">2. Kapcsolódjon WIFI-n keresztül</div>
+	<div class="item">3. SheetBright connect and play</div>
+	<!--div class="item">Külső vezértlő eszköz, csatlakoztassa áramforráshoz USB keresztül (Power bank, vagy telefon töltő)</div>
+	<div class="item">Csatlakozzon WIFI-n keresztül az Andoidos telefonon vagy tableten keresztül</div>
+	<div class="item">Indítsa el az ingyenes SheetBright programot, és nyomja meg a connect gombot</div-->
 	</div>
 	</div>
 	<div class="row">
@@ -470,14 +572,22 @@
             A SheetBright Visual eszközzel könnyedém megtanulhatja és lejátszhatja kedvenc zongora darabjait.
         </p>
     </section>
+	<div>
+	<div class="item">1. Csatlakoztassa USB áramforráshoz</div>
+	<div class="item">2. Kapcsolódjon WIFI-n keresztül</div>
+	<div class="item">3. SheetBright connect and play</div>
+	<!--div class="item">Külső vezértlő eszköz, csatlakoztassa áramforráshoz USB keresztül (Power bank, vagy telefon töltő)</div>
+	<div class="item">Csatlakozzon WIFI-n keresztül az Andoidos telefonon vagy tableten keresztül</div>
+	<div class="item">Indítsa el az ingyenes SheetBright programot, és nyomja meg a connect gombot</div-->
+	</div>
 	</div>
 	
-	<section class="image-strip">
+	<div class="image-grid">
 		<img src="edit_screen.jpg" alt="Kép 1">
 		<img src="music_screen.jpg" alt="Kép 2">
 		<img src="list_screen.jpg" alt="Kép 3">
 		<img src="game_screen.jpg" alt="Kép 4">
-	</section>
+	</div>
 	<p>
 		A SheetBright zenei alkalmazással kottákat tudunk megjeleníteni, szerkeszteni lejátszani. Népszerű dalok vannak a beépített gyűjteménybe, amelyek közül válogathatunk. A szoftverbe belekerült egy zongora klaviatúra, és egy játék, amelynél a lejátszott zene hangjai kis vonalként csorognak le jelezve a következő leütendő billentyűt. A helyes lejátszásért jutalom pontok kaphatóak,és elegendő pontokkal bronz, ezüst, arany stb. zongora díjjak, pajzsok szerezhetőek. 
 	</p>
@@ -489,7 +599,7 @@
             A böngésződ nem támogatja a videó lejátszást.
         </video>
         <p>
-            Ez egy saját feltöltésű videó (MP4 formátum).
+            Zongora játék (MP4 formátum).
         </p>
     </section>
 	
@@ -499,7 +609,7 @@
             A böngésződ nem támogatja a videó lejátszást.
         </video>
         <p>
-            Ez egy saját feltöltésű videó (MP4 formátum).
+            Zongora játék (MP4 formátum).
         </p>
     </section>
 
@@ -514,11 +624,11 @@
         </p>
     </section-->
 	
-	<section class="image-strip">
+	<div class="image-grid">
 		<img src="omr_screen1.jpg" alt="Kép 1">
 		<img src="omr_screen2.jpg" alt="Kép 2">
 		<img src="omr_screen3.jpg" alt="Kép 3">
-	</section>
+	</div>
 	<p>
 	Az alkalmazás funkciói között kotta digitalizáló béta verzió is megtalálható, amelet használva a lefotózott kotta kerül beolvasásra (OMR). 
 	</p>
@@ -607,6 +717,66 @@ notes2.forEach((d, i) => {
 
   .to(note, { opacity: 0, duration: 0.2 }, i * 0.35 + 0.9);
 });
+
+
+/*const text = ["Sheet", "Bright"];
+const container = document.getElementById("falling-text");
+
+let delay = 0;
+
+text.forEach((word, wordIndex) => {
+  const wordSpan = document.createElement("span");
+  wordSpan.className = "word";
+
+  [...word].forEach(char => {
+    const span = document.createElement("span");
+    span.textContent = char;
+    span.style.animationDelay = `${delay * 0.26}s`;
+    delay++;
+    wordSpan.appendChild(span);
+  });
+
+  container.appendChild(wordSpan);
+
+  // szóköz a szavak közé
+  if (wordIndex < text.length - 1) {
+    container.appendChild(document.createTextNode(" "));
+  }
+});*/
+
+const container = document.getElementById("falling-text");
+const words = ["Sheet", "Bright"];
+
+function startAnimation() {
+  container.innerHTML = "";
+  let delay = 0;
+
+  words.forEach((word, index) => {
+    const wordSpan = document.createElement("span");
+    wordSpan.className = "word";
+
+    [...word].forEach(char => {
+      const span = document.createElement("span");
+      span.textContent = char;
+      span.style.animationDelay = `${delay * 0.26}s`;
+      delay++;
+      wordSpan.appendChild(span);
+    });
+
+    container.appendChild(wordSpan);
+
+    if (index < words.length - 1) {
+      container.appendChild(document.createTextNode(" "));
+    }
+  });
+}
+
+// első indítás
+startAnimation();
+
+// ismétlés 4 másodpercenként
+setInterval(startAnimation, 4000);
+
 </script>
 <script>
 const t2 = gsap.timeline({ delay: 1.0 });
@@ -638,7 +808,8 @@ t2.from("#kep", {
     <a href="#">Szállítás</a>
     <a href="#">FAQ</a>
     <a href="#">ÁSZF</a>
-    <p>© 2026 Sheeet bright</p>
+	<a href="#">Policy</a>
+    <p>© 2026 Sheet bright</p>
 </footer>
 
 </body>
