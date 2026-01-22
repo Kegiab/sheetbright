@@ -311,6 +311,40 @@
             color: #555;
             margin-top: 5px;
         }
+		
+.cta-container {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.cta-primary {
+    display: inline-block;
+    padding: 18px 30px;
+    background: linear-gradient(135deg, #6772e5, #4f46e5);
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.cta-primary:hover {
+    opacity: 0.9;
+}
+
+.cta-sub {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 6px;
+}
+
+.cta-note {
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+}
+
 
     </style>
 </head>
@@ -622,9 +656,31 @@
 <!--a href="https://buy.stripe.com/test_XXXXXXXXXXXX" target="_blank" class="buy-button">
     Buy Now
 </a-->
-<a class="buy-button">
+<!--a class="buy-button">
     LATER! (Buy Now)
-</a>
+</a-->
+
+<!--div class="purchase-cta">
+    <a href="https://buy.stripe.com/test_XXXXXXXXXXXX" target="_blank" class="buy-button">
+        Buy Now $79
+        <span class="cta-sub">Free worldwide shipping</span>
+    </a>
+    <p class="cta-note">
+        You will be redirected to Stripe for secure payment.<br>
+        Import duties and VAT are paid upon delivery.
+    </p>
+</div-->
+
+<div class="purchase-cta">
+    <a class="buy-button">
+        LATER (Buy Now $79)
+        <span class="cta-sub">Free worldwide shipping</span>
+    </a>
+    <p class="cta-note">
+        You will be redirected to Stripe for secure payment.<br>
+        Import duties and VAT are paid upon delivery.
+    </p>
+</div>
 
 <div class="note" style="margin-top:20px; text-align:center;">
     You will be redirected to Stripe to securely complete your payment.
