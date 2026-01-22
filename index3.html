@@ -345,6 +345,18 @@
     }
 }
 
+/* Show only on desktop */
+.desktop-only {
+    display: inline-block;
+}
+
+/* Hide normal CTA on mobile */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+}
+
 
     </style>
 </head>
@@ -645,7 +657,7 @@
     </section>
 </div>
 <div class="cta-container">
-    <a href="shop.html" class="cta-primary">
+    <a href="shop.html" class="cta-primary desktop-only">
         Buy SheetBright Hardware
         <span class="cta-sub">Learn piano faster with guided lights</span>
     </a>
