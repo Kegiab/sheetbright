@@ -345,6 +345,58 @@
     margin-top: 10px;
 }
 
+/* MOBILE STICKY CTA */
+.sticky-cta {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sticky-cta {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(135deg, #6772e5, #4f46e5);
+        z-index: 9999;
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+    }
+
+    .sticky-cta a {
+        display: block;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        padding: 14px 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .sticky-cta span {
+        display: block;
+        font-size: 13px;
+        font-weight: normal;
+        opacity: 0.9;
+        margin-top: 2px;
+    }
+
+    /* Prevent content from being hidden behind sticky CTA */
+    body {
+        padding-bottom: 80px;
+    }
+}
+
+/* Show only on desktop */
+.desktop-only {
+    display: inline-block;
+}
+
+/* Hide normal CTA on mobile */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+}
 
     </style>
 </head>
@@ -661,7 +713,7 @@
 </a-->
 
 <!--div class="purchase-cta">
-    <a href="https://buy.stripe.com/test_XXXXXXXXXXXX" target="_blank" class="buy-button">
+    <a href="https://buy.stripe.com/test_XXXXXXXXXXXX" target="_blank" class="buy-button desktop-only">
         Buy Now $79
         <span class="cta-sub">Free worldwide shipping</span>
     </a>
@@ -672,7 +724,7 @@
 </div-->
 
 <div class="purchase-cta">
-    <a class="buy-button">
+    <a class="buy-button desktop-only">
         LATER (Buy Now $79)
         <span class="cta-sub">Free worldwide shipping</span>
     </a>
@@ -868,6 +920,20 @@ document.querySelectorAll('.item').forEach(el => {
 </script>
 	
 	<!--a href="https://www.youtube.com/embed/8jPQjjsBbIc">Purchase</a-->
+	
+<!--div class="sticky-cta">
+    <a href="https://buy.stripe.com/test_XXXXXXXXXXXX" target="_blank">
+        Buy Now $79
+        <span>Free shipping · Pay with Stripe</span>
+    </a>
+</div-->
+
+<div class="sticky-cta">
+    <a>
+        LATER (Buy Now $79)
+        <span>Free shipping · Pay with Stripe</span>
+    </a>
+</div>
 </main>
 
 <!-- LÁBLÉC -->
