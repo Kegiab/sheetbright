@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Sheet bright</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: rgb(0,0,0);
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* ===== FEJLÉC ===== */
+        header {
+            background-color: rgb(65,110,119);
+            color: white;
+            padding: 10px 7px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: rgb(55,130,191);
+        }
+
+        /* ===== TARTALOM ===== */
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px 10px;
+        }
+
+        section {
+            margin-bottom: 70px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* ===== GIF SÁV ===== */
+        .gif-strip {
+            background-color: rgb(55,130,191);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .gif-strip img {
+            max-height: 120px;
+        }
+
+        /* ===== VIDEÓK ===== */
+        iframe, video {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+        }
+
+        /* ===== LÁBLÉC ===== */
+        footer {
+            background-color: rgb(77,146,160);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: rgb(55,130,191);
+        }
+		
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+
+		body {
+			display: flex;
+			flex-direction: column;
+		}
+
+		main {
+			flex: 1;
+		}
+
+		
+		/* ===== MAGAS KÉPSÁV ===== */
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap; /* új sorba kerül, ha nincs elég hely */
+    gap: 10px; /* kis rés a képek között */
+    justify-content: center;
+  }
+
+  .image-grid img {
+    width: clamp(150px, 15vw, 400px); /* minimum 200px, maximum 400px, dinamikusan változik */
+    height: auto; /* magasság arányosan a szélességgel */
+    aspect-ratio: 1/2; /* szélesség : magasság = 1:2 */
+    object-fit: contain; /* a kép nem vágódik, teljesen látszik */
+    display: block;
+    border: 1px solid #ccc;
+  }
+		
+		.inline-icon {
+			width: 64;
+			height: 64px;
+			object-fit: contain;
+			vertical-align: middle;
+			margin-right: 8px;
+		}
+		
+		.title-with-icon {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.title-icon {
+			width: 64px;
+			height: 64px;
+			object-fit: contain;
+		}
+		
+		.title-with-icon {
+			padding-left: 44px;
+			background: url("app_icon2.png") no-repeat left center;
+			background-size: 32px 32px;
+		}
+		
+		.box {
+  width: 200px;
+  height: 100px;
+  background: #4CAF50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: fadeSlide 1.2s ease-out forwards;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top: 5px solid #2196F3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.item {
+  opacity: 0;
+  animation: appear 0.8s ease forwards;
+  animation-play-state: paused;
+}
+
+.item.animate {
+  animation-play-state: running;
+}
+
+.item:nth-child(1) { animation-delay: 0.5s; }
+.item:nth-child(2) { animation-delay: 1.5s; }
+.item:nth-child(3) { animation-delay: 2.5s; }
+.item:nth-child(4) { animation-delay: 3.5s; }
+.item:nth-child(5) { animation-delay: 4.5s; }
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;   /* függőleges igazítás */
+  gap: 8px;              /* távolság köztük */
+  justify-content: center;
+}
+
+.rowLeft {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.text-row {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.text-row span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-40px);
+  animation: fall 0.5s ease-out forwards;
+}
+
+#falling-text {
+  display: inline-block;
+}
+
+.word {
+  white-space: nowrap; /* A szó NEM törhet meg */
+}
+
+.word span {
+  display: inline-block;
+  animation: fall 1s ease forwards;
+}
+
+@keyframes fall {
+  0%   { transform: translateY(-80px); opacity: 0; }
+  80%  { transform: translateY(10px); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+
+
+.nav {
+  display: flex;
+  gap: 1px;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 14px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.nav a svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+}
+
+.nav a:hover {
+  background: #f3f4f6;
+  color: #111;
+}
+
+.nav a:hover svg {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+    </style>
+</head>
+
+<body>
+
+<!-- FEJLÉC -->
+<header>
+	<!--p class="text-with-icon">
+    <img src="app_icon.png" alt="" class="inline-icon">
+	</p -->
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- KÉP + LEÍRÁS -->
+    <!--section>
+        <img src="key1.jpg" alt="Kép 1" id="kep1">
+        <p>
+            Ez az első leírás. A fő szín nyugodt, modern hatást ad az oldalnak.
+        </p>
+    </section-->
+
+    <!-- KÉP + LEÍRÁS -->
+    <!--section>
+        <img src="key2.png" alt="Kép 2" id="kep2">
+        <p>
+            A SheetBright Visual eszközzel könnyedém megtanulhatja és lejátszhatja kedvenc zongora darabjait.
+        </p>
+    </section-->
+	<div class="row">
+	<svg id="stage" width="160" height="140" viewBox="450 0 400 650">
+
+  <!-- ===== BAL: C–D–E FELETT ===== -->
+  <g id="staffLeft" stroke="#333" stroke-width="2">
+    <line x1="470" y1="80" x2="470" y2="300"/> <!-- C -->
+    <line x1="500" y1="80" x2="500" y2="300"/> <!-- D -->
+    <line x1="530" y1="80" x2="530" y2="300"/> <!-- E -->
+    <line x1="560" y1="80" x2="560" y2="300"/>
+    <line x1="590" y1="80" x2="590" y2="300"/>
+  </g>
+
+  <!-- ===== JOBB: G–A–H FELETT ===== -->
+  <g id="staffRight" stroke="#444" stroke-width="2">
+    <line x1="700" y1="80" x2="700" y2="300"/> <!-- G -->
+    <line x1="730" y1="80" x2="730" y2="300"/> <!-- A -->
+    <line x1="760" y1="80" x2="760" y2="300"/> <!-- H -->
+    <line x1="790" y1="80" x2="790" y2="300"/>
+    <line x1="820" y1="80" x2="820" y2="300"/>
+  </g>
+
+  <!-- ===== ZONGORA ===== -->
+  <g id="piano" transform="translate(430,340)">
+
+    <!-- tok -->
+    <rect x="-40" y="-30" width="500" height="260" rx="22"
+          fill="rgb(55,100,109)"/>
+
+    <!-- fehér billentyűk -->
+    <g id="whiteKeys">
+      <g id="keyC" transform="translate(0,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyD" transform="translate(60,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyE" transform="translate(120,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyF" transform="translate(180,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyG" transform="translate(240,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyA" transform="translate(300,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyH" transform="translate(360,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+    </g>
+
+    <!-- fekete billentyűk -->
+    <g id="blackKeys">
+      <rect x="40"  width="40" height="120" rx="5" fill="url(#blackKey)"/>
+      <rect x="100" width="40" height="120" rx="5" fill="url(#blackKey)"/>
+      <rect x="220" width="40" height="120" rx="5" fill="url(#blackKey)"/>
+      <rect x="280" width="40" height="120" rx="5" fill="url(#blackKey)"/>
+      <rect x="340" width="40" height="120" rx="5" fill="url(#blackKey)"/>
+    </g>
+  </g>
+
+  <!-- ===== HANGJEGY SABLON ===== -->
+  <g id="noteTemplate" visibility="hidden">
+    <ellipse cx="0" cy="0" rx="10" ry="7" fill="#fff"/>
+    <line x1="9" y1="0" x2="9" y2="-36" stroke="#fff" stroke-width="2"/>
+    <path d="M9 -36 Q26 -28 16 -14" fill="none" stroke="#fff" stroke-width="2"/>
+  </g>
+
+  <!-- ===== GRADIENSEK ===== -->
+  <defs>
+    <linearGradient id="whiteKey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f2f2f2"/>
+      <stop offset="100%" stop-color="#cccccc"/>
+    </linearGradient>
+
+    <linearGradient id="whiteShadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.7)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.18)"/>
+    </linearGradient>
+
+    <linearGradient id="blackKey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="100%" stop-color="#000"/>
+    </linearGradient>
+
+    <linearGradient id="caseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#444"/>
+      <stop offset="100%" stop-color="#111"/>
+    </linearGradient>
+  </defs>
+
+</svg>
+	<div>
+    <h1>
+	<!--img src="app_icon.png" alt="" class="title-icon"-->
+	<div class="text-row" id="falling-text"></div>
+	</h1>
+	</div>
+	<svg id="stage2" width="160" height="140" viewBox="400 0 400 650">
+
+  <!-- ===== BAL: C–D–E FELETT ===== -->
+  <g id="staffLeft" stroke="#333" stroke-width="2">
+    <line x1="470" y1="80" x2="470" y2="300"/> <!-- C -->
+    <line x1="500" y1="80" x2="500" y2="300"/> <!-- D -->
+    <line x1="530" y1="80" x2="530" y2="300"/> <!-- E -->
+    <line x1="560" y1="80" x2="560" y2="300"/>
+    <line x1="590" y1="80" x2="590" y2="300"/>
+  </g>
+
+  <!-- ===== JOBB: G–A–H FELETT ===== -->
+  <g id="staffRight" stroke="#444" stroke-width="2">
+    <line x1="700" y1="80" x2="700" y2="300"/> <!-- G -->
+    <line x1="730" y1="80" x2="730" y2="300"/> <!-- A -->
+    <line x1="760" y1="80" x2="760" y2="300"/> <!-- H -->
+    <line x1="790" y1="80" x2="790" y2="300"/>
+    <line x1="820" y1="80" x2="820" y2="300"/>
+  </g>
+
+  <!-- ===== ZONGORA ===== -->
+  <g id="piano" transform="translate(430,340)">
+
+    <!-- tok -->
+    <rect x="-40" y="-30" width="500" height="260" rx="22"
+          fill="rgb(55,100,109)"/>
+
+    <!-- fehér billentyűk -->
+    <g id="whiteKeys">
+      <g id="keyC" transform="translate(0,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyD" transform="translate(60,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyE" transform="translate(120,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyF" transform="translate(180,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyG" transform="translate(240,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyA" transform="translate(300,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+      <g id="keyH" transform="translate(360,0)">
+        <rect width="60" height="200" rx="6" fill="url(#whiteKey)"/>
+        <rect width="60" height="200" rx="6" fill="url(#whiteShadow)"/>
+      </g>
+    </g>
+
+    <!-- fekete billentyűk -->
+    <g id="blackKeys">
+      <rect x="40"  width="40" height="120" rx="5" fill="url(#blackKey)"/>
+      <rect x="100" width="40" height="120" rx="5" fill="url(#blackKey)"/>
+      <rect x="220" width="40" height="120" rx="5" fill="url(#blackKey)"/>
+      <rect x="280" width="40" height="120" rx="5" fill="url(#blackKey)"/>
+      <rect x="340" width="40" height="120" rx="5" fill="url(#blackKey)"/>
+    </g>
+  </g>
+
+  <!-- ===== HANGJEGY SABLON ===== -->
+  <g id="noteTemplate2" visibility="hidden">
+    <ellipse cx="0" cy="0" rx="10" ry="7" fill="#fff"/>
+    <line x1="9" y1="0" x2="9" y2="-36" stroke="#fff" stroke-width="2"/>
+    <path d="M9 -36 Q26 -28 16 -14" fill="none" stroke="#fff" stroke-width="2"/>
+  </g>
+
+  <!-- ===== GRADIENSEK ===== -->
+  <defs>
+    <linearGradient id="whiteKey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f2f2f2"/>
+      <stop offset="100%" stop-color="#cccccc"/>
+    </linearGradient>
+
+    <linearGradient id="whiteShadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.7)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.18)"/>
+    </linearGradient>
+
+    <linearGradient id="blackKey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="100%" stop-color="#000"/>
+    </linearGradient>
+
+    <linearGradient id="caseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#444"/>
+      <stop offset="100%" stop-color="#111"/>
+    </linearGradient>
+  </defs>
+
+</svg>
+</div>
+
+<div class="row">
+<nav class="nav">
+  <a href="index.html">
+    <!-- Home -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 11.5L12 4l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"
+            fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linejoin="round"/>
+    </svg>
+    <span>Home</span>
+  </a>
+
+  <a href="shop.html">
+    <!-- Shopping cart (szebb 😊) -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="9" cy="21" r="1"/>
+      <circle cx="18" cy="21" r="1"/>
+      <path d="M2 3h2l2.4 12.4a2 2 0 0 0 2 1.6h9.6a2 2 0 0 0 2-1.6L22 7H6"
+            fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Shop</span>
+  </a>
+
+  <a href="contact.html">
+    <!-- Contact -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 6h18v12H3z"
+            fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linejoin="round"/>
+      <path d="M3 6l9 7 9-7"
+            fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linejoin="round"/>
+    </svg>
+    <span>Contact</span>
+  </a>
+</nav>
+</div>
+
+</header>
+
+
+<!-- GIF SÁV -->
+<!--div class="gif-strip">
+    <img src="animation.gif" alt="Animáció">
+</div-->
+
+<!-- FŐ TARTALOM rgb(16,30,32)-->
+<main>
+
+<h1>Terms and Conditions</h1>
+
+<p><strong>Last updated:</strong> 2026.01.22.</p>
+
+<p>
+These Terms and Conditions ("Terms") govern the purchase and use of the external hardware device ("Product")
+sold through our official website ("Website") by [Your Company Name] ("we", "our", "us").
+By purchasing the Product, you agree to these Terms.
+</p>
+
+<h2>1. Product and Availability</h2>
+
+<p>
+The Product is an optional external electronic device designed to be used with our mobile application ("App").
+Availability of the Product may vary depending on location and stock.
+</p>
+
+<h2>2. Ordering and Payment</h2>
+
+<p>
+All orders are placed through the Website. Payment is processed securely via <strong>Stripe</strong>.
+By completing a purchase, you authorize us to charge the full order amount to your payment method.
+</p>
+
+<ul>
+    <li>All prices are displayed in USD or your local currency.</li>
+    <li>Payment is required in full before the Product is shipped.</li>
+    <li>You are responsible for ensuring that your payment information is accurate.</li>
+</ul>
+
+<h2>3. Shipping</h2>
+
+<p>
+We offer <strong>free shipping</strong> worldwide. Estimated delivery times vary depending on your location.
+</p>
+
+<p>
+Please note that import duties, taxes, VAT, or customs fees may apply in your country.  
+These charges are <strong>not included</strong> in the Product price and are the responsibility of the buyer.
+</p>
+
+<h2>4. Order Cancellation and Refunds</h2>
+
+<p>
+You may cancel an order before it is shipped by contacting our support team.  
+Once the Product is shipped, cancellations are no longer possible.
+</p>
+
+<p>
+Refunds are issued at our discretion and are subject to the Product being returned in its original condition.
+Please contact <a href="mailto:sheetbright@gmail.com">our support team</a> for any refund requests.
+</p>
+
+<h2>5. Product Use</h2>
+
+<p>
+The Product is designed to work exclusively with our App. By using the Product, you agree to follow all instructions
+provided in the user manual or on the Website.
+</p>
+
+<p>
+We are not responsible for damages or malfunctions caused by misuse, unauthorized modifications, or third-party accessories.
+</p>
+
+<h2>6. Limitation of Liability</h2>
+
+<p>
+To the maximum extent permitted by law, [Your Company Name] shall not be liable for any indirect, incidental,
+or consequential damages arising from the use of the Product or App.
+</p>
+
+<h2>7. Governing Law</h2>
+
+<p>
+These Terms are governed by the laws of [Your Country], without regard to its conflict of laws rules.  
+By purchasing the Product, you agree to submit to the exclusive jurisdiction of the courts of [Your Country].
+</p>
+
+<h2>8. Changes to Terms</h2>
+
+<p>
+We may update these Terms from time to time. Any changes will be posted on this page and become effective immediately.
+It is your responsibility to review the Terms regularly.
+</p>
+
+<h2>9. Contact</h2>
+
+<p>
+For questions about these Terms or the Product, please contact us at:<br>
+<strong>Email:</strong> <a href="mailto:sheetbright@gmail.com">sheetbright@gmail.com</a><br>
+<strong>Website:</strong> <a href="https://sheetbright.com">https://sheetbright.com</a>
+</p>
+	
+<script>
+const svg = document.getElementById("stage");
+const template = document.getElementById("noteTemplate");
+
+function createNote(x, y) {
+  const n = template.cloneNode(true);
+  n.removeAttribute("id");
+  n.setAttribute("visibility", "visible");
+  n.setAttribute("transform", `translate(${x},${y})`);
+  svg.appendChild(n);
+  return n;
+}
+
+const notes = [
+  { x: 470, key: "keyC" },
+  { x: 530, key: "keyD" },
+  { x: 590, key: "keyE" },
+
+  { x: 700, key: "keyG" },
+  { x: 760, key: "keyA" },
+  { x: 820, key: "keyH" }
+];
+
+const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+
+notes.forEach((d, i) => {
+  const note = createNote(d.x, 90);
+
+  tl.fromTo(note,
+    { y: 0 },
+    { y: 260, duration: 1, ease: "power1.in" },
+    i * 0.35
+  )
+  .to(`#${d.key}`, {
+    y: 8,
+    duration: 0.1,
+    yoyo: true,
+    repeat: 1
+  }, i * 0.35 + 0.85)
+
+  .to(note, { opacity: 0, duration: 0.2 }, i * 0.35 + 0.9);
+});
+
+const svg2 = document.getElementById("stage2");
+const template2 = document.getElementById("noteTemplate2");
+
+function createNote2(x, y) {
+  const n = template2.cloneNode(true);
+  n.removeAttribute("id");
+  n.setAttribute("visibility", "visible");
+  n.setAttribute("transform", `translate(${x},${y})`);
+  svg2.appendChild(n);
+  return n;
+}
+
+const notes2 = [
+  { x: 470, key: "keyC" },
+  { x: 530, key: "keyD" },
+  { x: 590, key: "keyE" },
+
+  { x: 700, key: "keyG" },
+  { x: 760, key: "keyA" },
+  { x: 820, key: "keyH" }
+];
+
+const t3 = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+
+notes2.forEach((d, i) => {
+  const note = createNote2(d.x, 90);
+
+  tl.fromTo(note,
+    { y: 0 },
+    { y: 260, duration: 1, ease: "power1.in" },
+    i * 0.35
+  )
+  .to(`#${d.key}`, {
+    y: 8,
+    duration: 0.1,
+    yoyo: true,
+    repeat: 1
+  }, i * 0.35 + 0.85)
+
+  .to(note, { opacity: 0, duration: 0.2 }, i * 0.35 + 0.9);
+});
+
+
+/*const text = ["Sheet", "Bright"];
+const container = document.getElementById("falling-text");
+
+let delay = 0;
+
+text.forEach((word, wordIndex) => {
+  const wordSpan = document.createElement("span");
+  wordSpan.className = "word";
+
+  [...word].forEach(char => {
+    const span = document.createElement("span");
+    span.textContent = char;
+    span.style.animationDelay = `${delay * 0.26}s`;
+    delay++;
+    wordSpan.appendChild(span);
+  });
+
+  container.appendChild(wordSpan);
+
+  // szóköz a szavak közé
+  if (wordIndex < text.length - 1) {
+    container.appendChild(document.createTextNode(" "));
+  }
+});*/
+
+const container = document.getElementById("falling-text");
+const words = ["Sheet", "Bright"];
+
+function startAnimation() {
+  container.innerHTML = "";
+  let delay = 0;
+
+  words.forEach((word, index) => {
+    const wordSpan = document.createElement("span");
+    wordSpan.className = "word";
+
+    [...word].forEach(char => {
+      const span = document.createElement("span");
+      span.textContent = char;
+      span.style.animationDelay = `${delay * 0.26}s`;
+      delay++;
+      wordSpan.appendChild(span);
+    });
+
+    container.appendChild(wordSpan);
+
+    if (index < words.length - 1) {
+      container.appendChild(document.createTextNode(" "));
+    }
+  });
+}
+
+// első indítás
+startAnimation();
+
+// ismétlés 4 másodpercenként
+setInterval(startAnimation, 4000);
+
+</script>
+<script>
+const t2 = gsap.timeline({ delay: 1.0 });
+
+// KIINDULÓ ÁLLAPOT
+t2.from("#kep", {
+  x: -50,
+  opacity: 0,
+  scale: 0.9,
+  duration: 1
+})
+
+// VÉGSŐ ÁLLAPOT
+.to("#kep", {
+  x: 0,
+  rotation: 0,
+  scale: 1,
+  opacity: 1,
+  duration: 0.8
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate');
+      observer.unobserve(entry.target); // csak egyszer fusson le
+    }
+  });
+}, {
+  threshold: 0.3
+});
+
+document.querySelectorAll('.item').forEach(el => {
+  observer.observe(el);
+});
+</script>
+	
+	<!--a href="https://www.youtube.com/embed/8jPQjjsBbIc">Purchase</a-->
+</main>
+
+<!-- LÁBLÉC -->
+<footer>
+    <a href="contact.html">Contact</a>
+    <a href="shipping.html">Shipping</a>
+    <a href="faq.html">FAQ</a>
+    <a href="terms.html">T&Cs</a>
+	<a href="policy.html">Policy</a>
+    <p>© 2026 Sheet Bright</p>
+</footer>
+
+</body>
+</html>
